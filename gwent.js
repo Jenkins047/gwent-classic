@@ -1337,10 +1337,11 @@ class Game {
 	
 	// Allows the player to swap out up to two cards from their iniitial hand
 	async initialRedraw(){
-		for (let i=0; i< 2; i++)
-			player_op.controller.redraw();
-		await ui.queueCarousel(player_me.hand, 2, async (c, i) => await player_me.deck.swap(c, c.removeCard(i)), c => true, true, true, "Choose up to 2 cards to redraw.");
-		ui.enablePlayer(false);
+		let next_player = this.firstPlayer === player_me ? player_op : player_me;
+		await ui.queueCarousel(this.firstPlayer.hand, 2, async (c, i) => await this.firstPlayer.deck.swap(c, c.removeCard(i)), c => true, true, true, "Choose up to 2 cards to redraw.");
+		await ui.notification("opponent-redraws", 1200);
+		await ui.queueCarousel(next_player.hand, 2, async (c, i) => await next_player.deck.swap(c, c.removeCard(i)), c => true, true, true, "Choose up to 2 cards to redraw.");
+		ui.enablePlayer(true);
 		game.startRound();
 	}
 	

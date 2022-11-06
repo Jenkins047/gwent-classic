@@ -143,6 +143,8 @@ html {
 #notif-me-coin { background-image: url('img/icons/notif_me_coin.png'); }
 #notif-me-coin::after { content:"You will go first"; }
 
+#notif-opponent-redraws::after { content:"Opponent redraws"; }
+
 #notif-op-coin { background-image: url('img/icons/notif_op_coin.png'); }
 #notif-op-coin::after { content:"Your opponent will go first"; }
 
